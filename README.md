@@ -9,3 +9,6 @@
       
   PHU Quoc-Hieu
       mail: quoc-hieu.phu1@etu.univ-lorraine.fr
+
+  TAVERNIER Julien
+      mail: julien.tavernier6@etu.univ-lorraine.fr
