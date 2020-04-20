@@ -1,0 +1,32 @@
+#mosaique{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.element{
+  padding: 1%;
+
+  width: 200px;
+  height: 300px;
+  border-radius: 15%;
+  border-style: solid;
+  border-width: 3px;
+  box-shadow: 1px 1px 1px 1px black;
+}
+
+a{
+  margin: 1%;
+  text-decoration: none;
+  color: black;
+}
+
+a:hover{
+  moz-transform: scale(1.25);
+  transform: scale(1.25);
+}
+
+h3,p{
+  text-align: center;
+}
