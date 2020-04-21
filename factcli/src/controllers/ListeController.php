@@ -9,7 +9,7 @@ use factcli\models\Item as Item;
 use factcli\models\Client as Client;
 use factcli\vues\ClientVue as ClientVue;
 
-class ClientController{
+class ListeController{
 
   public function __Construct(){
     ConnectionFactory::conn();
