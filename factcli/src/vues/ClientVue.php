@@ -5,27 +5,11 @@ class ClientVue{
 
   private $typeVue;
 
-  //Revois une chaine de caractère faite du code html du formulaire de la liste des client
-  public function genereClientliste($clients,$url){
-    $html ='<form action="'.$url.'" method="get">
-            <select name="id">
-              <option value="0">Séléctionnez un utilisateur</option>';
-    foreach ($clients as $id_client => $nom_client) {
-      $html = $html.'<option value="'.$id_client.'">'.$nom_client.'</option>';
-    }
-    $html = $html.'  </select>
-            <p>
-              <input type="submit" value="OK">
-            </p>
-          </form>';
-    return $this->genereHtml($html);
-  }
-
   //Revois une chaine de caractère faite du code html du tableau de facture d'un client
-  public function genereClientFacture($clients,$nomClient){
-    $titre = array('Date de facture','Montant');
+  public function genereListeItem($items){
+    $titre = array('nom','descr','img','tarif');
     $html = "
-    <h2>Tableau d Items de $nomClient</h2>
+    <h2>Liste</h2>
     <table>
       <tr>";
 
@@ -34,13 +18,31 @@ class ClientVue{
     }
     $html = $html."</tr>";
 
-    foreach ($clients as $client) {
+    foreach ($items as $item) {
       $html = $html."<tr>
-              <td>$client[0]</td>
-              <td>$client[1]</td>
+              <td>$item[0]</td>
+              <td>$item[1]</td>
+              <td>$item[2]</td>
+              <td>$item[3]</td>
             </tr>";
     }
     $html = $html."</table>";
+    return $this->genereHtml($html);
+  }
+
+  public function genereClientFactureMosaique($app,$clients){
+    $titre = array('titre','description');
+    $html = "<h2>Liste</h2>";
+    $html = $html.'<div id="mosaique">';
+    foreach ($clients as $client) {
+      $html = $html.'<a href="'.$app->urlFor('liste_item',array('token' => $client[2])).'">
+                      <div class="element"'.">
+                        <h3>$client[0]</h3>
+                        <p>$client[1]</p>
+                      </div>
+                     </a>";
+    }
+    $html = $html.'</div>';
     return $this->genereHtml($html);
   }
 
@@ -51,6 +53,7 @@ class ClientVue{
                 <head>
                   <title>Titre du document</title>
                   <meta charset=".'"UTF-8"'.">
+                  <link rel=".'"stylesheet"'." href=".'"../src/www/main.css"'."/>
                 </head>
                 <body>
                   $content

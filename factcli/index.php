@@ -11,27 +11,19 @@
  $app = new \Slim\Slim();
 
 //Création du lien vers les tableaux de facture des clients
- $app->get('/client/liste/facture(/:id)', function($id = -1) use($app){
-   //Si id == 0 alors valeur = "Séléctionnez un utilisateur"
-   //donc on n'envoie pas le formulaire
-   if($id==0){
-     $app->redirect($app->urlFor('client_liste'));
-   }
+ $app->get('/liste/(:token)', function($token) use($app){
    //Sinon on récupère l'url avec l'id
-   if($id > -1 ){
-     $controller = new ClientController();
-     $controller->construitTableClient($id);
-   }
-   else{
-     $app->redirect($app->urlFor('client_factures',array('id' => $app->request->get('id'))));
-   }
- })->name('client_factures');
+   $controller = new ClientController();
+   $controller->construitListeItem($token);
+
+ })->name('liste_item');
+
 
  //Création du lien vers la liste des clients
- $app->get('/client/liste', function() use($app){
+ $app->get('/liste', function() use($app){
    $controller = new ClientController();
-   $controller->construitListeClient($app->urlFor('client_factures',array(':id'=>$app->request->get('id'))));
- })->name('client_liste');
+   $controller->construitListe($app);
+ })->name('liste');
 
  $app->run();
 

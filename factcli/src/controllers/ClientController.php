@@ -4,8 +4,9 @@ require_once 'vendor/autoload.php';
 
 use Illuminate\Database\Capsule\Manager as DB;
 use factcli\conf\ConnectionFactory as ConnectionFactory;
+use factcli\models\Liste as Liste;
+use factcli\models\Item as Item;
 use factcli\models\Client as Client;
-use factcli\models\Facture as Facture;
 use factcli\vues\ClientVue as ClientVue;
 
 class ClientController{
@@ -14,51 +15,46 @@ class ClientController{
     ConnectionFactory::conn();
   }
 
-  //Revois un tableau de tout les clients de la base de forme id = id_client, valeur = nom_client
-  private function getListeClient(){
-    $clients = array();
-    $req1 = Client::select('id','nomcli')->get();
-    foreach ($req1 as $row) {
-      $clients[$row->id] = $row->nomcli;
+  private function getListes($nbLignes = 10){
+    $listes = array();
+    $reqListe = Liste::select('titre','description','token')->get();
+    foreach ($reqListe as $row) {
+      $listes[] = array($row->titre,$row->description,$row->token);
     }
-    return $clients;
+    return $listes;
   }
 
-  //Revois un tableau de toutes les factures d'un client de forme valeur = {date_facture,montant}
-  private function getTableauClient($id){
-    $factures = array();
-    $req1 = Facture::select('datefact','montant')->where('client_id','=',$id)->get();
-    foreach ($req1 as $row) {
-      $factures[] = array($row->datefact,$row->montant);
+  private function getListeId($token){
+    $listeId = array();
+    $reqListe = Liste::select('no')->where('token','=',$token)->get();
+    foreach ($reqListe as $row) {
+      $listeId[0] = $row->no;
     }
-    return $factures;
+    return $listeId[0];
   }
 
-  //Revois la vue liste au client
-  public function construitListeClient($url){
+  private function getItems($liste_id){
+    $listes = array();
+    $reqListe = Item::select('nom','descr','img','tarif')->where('liste_id','=',$liste_id)->get();
+    foreach ($reqListe as $row) {
+      $listes[] = array($row->nom,$row->descr,$row->img,$row->tarif);
+    }
+    return $listes;
+  }
+
+  public function construitListe($app){
     $vue = new ClientVue();
-    $clients = $this->getListeClient();
-    $html = $vue->genereClientliste($clients,$url);
+    $listes = $this->getListes();
+    $html = $vue->genereClientFactureMosaique($app,$listes);
     $this->afficheHtml($html);
   }
 
-  //Revois la vue tableau au client
-  public function construitTableClient($id){
+  public function construitListeItem($token){
     $vue = new ClientVue();
-    $client = $this->getTableauClient($id);
-    $nomClient = $this->getClient($id);
-    $html = $vue->genereClientFacture($client,$nomClient);
+    $liste_id = $this->getListeId($token);
+    $items = $this->getItems($liste_id);
+    $html = $vue->genereListeItem($items);
     $this->afficheHtml($html);
-  }
-
-  //Revois le nom du client qui a l'identifiant $id
-  private function getClient($id){
-    $client = array();
-    $req1 = Client::select('id','nomcli')->where('id','=',$id)->get();
-    foreach ($req1 as $row) {
-      $client[0] = $row->nomcli;
-    }
-    return $client[0];
   }
 
   //affiche la page html
