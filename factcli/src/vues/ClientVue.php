@@ -6,12 +6,13 @@ class ClientVue{
   private $typeVue;
 
   //Revois une chaine de caractère faite du code html du tableau de facture d'un client
-  public function genereListeItem($items){
+  public function genereListeItem($app,$items){
     $titre = array('nom','descr','img','tarif');
-    $html = "
+    $html = '
     <h2>Liste</h2>
+    <a href = "'.$app->urlFor('liste').'">Retour</a>
     <table>
-      <tr>";
+      <tr>';
 
     foreach ($titre as $value) {
       $html = $html."<th>$value</th>";

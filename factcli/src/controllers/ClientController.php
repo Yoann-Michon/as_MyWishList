@@ -49,11 +49,11 @@ class ClientController{
     $this->afficheHtml($html);
   }
 
-  public function construitListeItem($token){
+  public function construitListeItem($app,$token){
     $vue = new ClientVue();
     $liste_id = $this->getListeId($token);
     $items = $this->getItems($liste_id);
-    $html = $vue->genereListeItem($items);
+    $html = $vue->genereListeItem($app,$items);
     $this->afficheHtml($html);
   }
 
