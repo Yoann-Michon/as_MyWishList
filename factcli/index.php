@@ -25,6 +25,12 @@
    $controller->construitListe($app);
  })->name('liste');
 
+ //Création du lien vers le formulaire de login
+ $app->get('/login', function() use($app){
+   $controller = new VueController();
+   $controller->construitFormulaire($app);
+ })->name('login');
+ 
  $app->run();
 
 ?>

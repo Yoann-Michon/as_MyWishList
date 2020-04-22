@@ -15,6 +15,7 @@ class DataController{
   }
 
   public function getListes($nbLignes = 10){
+    // TODO: faire en sorte qu il remonte $nbLignes lignes (pour les filtres).
     $listes = array();
     $reqListe = Liste::select('titre','description','token')->get();
     foreach ($reqListe as $row) {
