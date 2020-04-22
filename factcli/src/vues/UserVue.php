@@ -3,6 +3,7 @@ namespace factcli\vues;
 require_once 'vendor/autoload.php';
 
 class UserVue{
+
   public static function genereLogin($app){
     $html ='<form action="" method="get">
               <label>Nom</label>
@@ -27,5 +28,6 @@ class UserVue{
             </form>';
     return $html;
   }
+  
 }
  ?>

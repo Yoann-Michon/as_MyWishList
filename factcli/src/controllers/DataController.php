@@ -6,7 +6,7 @@ use Illuminate\Database\Capsule\Manager as DB;
 use factcli\conf\ConnectionFactory as ConnectionFactory;
 use factcli\models\Liste as Liste;
 use factcli\models\Item as Item;
-use factcli\models\Client as Client;
+use factcli\models\User as User;
 
 class DataController{
 
