@@ -11,11 +11,12 @@
  $app = new \Slim\Slim();
 
 //Création du lien vers les tableaux de facture des clients
- $app->get('/liste/(:token)', function($token) use($app){
+ $app->get('/liste/(:token)', function($token = -1) use($app){
    //Sinon on récupère l'url avec l'id
-   $controller = new ClientController();
-   $controller->construitListeItem($token);
-
+   if($token != -1){
+     $controller = new ClientController();
+     $controller->construitListeItem($app,$token);
+   }
  })->name('liste_item');
 
 
