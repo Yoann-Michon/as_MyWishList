@@ -8,11 +8,13 @@ use factcli\models\User as User;
 use factcli\vues\UserVue as UserVue;
 
 class UserController{
+  
   public function __Construct(){
     ConnectionFactory::conn();
   }
 
-  public function  {
+  public function genereForm($app){
+    UserVue::genereForm($app);
 
   }
 }
