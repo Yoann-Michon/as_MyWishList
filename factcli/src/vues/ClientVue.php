@@ -3,10 +3,8 @@ namespace factcli\vues;
 
 class ClientVue{
 
-  private $typeVue;
-
   //Revois une chaine de caractère faite du code html du tableau de facture d'un client
-  public function genereListeItem($app,$items){
+  public static function genereListeItem($app,$items){
     $titre = array('nom','descr','img','tarif');
     $html = '
     <h2>Liste</h2>
@@ -28,10 +26,10 @@ class ClientVue{
             </tr>";
     }
     $html = $html."</table>";
-    return $this->genereHtml($html);
+    return $html;
   }
 
-  public function genereClientFactureMosaique($app,$clients){
+  public static function genereClientFactureMosaique($app,$clients){
     $titre = array('titre','description');
     $html = "<h2>Liste</h2>";
     $html = $html.'<div id="mosaique">';
@@ -44,22 +42,6 @@ class ClientVue{
                      </a>";
     }
     $html = $html.'</div>';
-    return $this->genereHtml($html);
-  }
-
-  //Revois une chaine de caractère faite du code html complet de la page
-  public function genereHtml($content){
-    $html = "<!DOCTYPE html>
-              <html lang=".'"fr"'.">
-                <head>
-                  <title>Titre du document</title>
-                  <meta charset=".'"UTF-8"'.">
-                  <link rel=".'"stylesheet"'." href=".'"../src/www/main.css"'."/>
-                </head>
-                <body>
-                  $content
-                </body>
-              </html>";
     return $html;
   }
 }

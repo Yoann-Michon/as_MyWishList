@@ -8,6 +8,8 @@ use factcli\models\Liste as Liste;
 use factcli\models\Item as Item;
 use factcli\models\Client as Client;
 use factcli\vues\ClientVue as ClientVue;
+use factcli\vues\PrincipaleVue as PrincipaleVue;
+
 
 class ListeController{
 
@@ -43,17 +45,19 @@ class ListeController{
   }
 
   public function construitListe($app){
-    $vue = new ClientVue();
     $listes = $this->getListes();
-    $html = $vue->genereClientFactureMosaique($app,$listes);
+
+    $html = ClientVue::genereClientFactureMosaique($app,$listes);
+    $html = PrincipaleVue::genereHtml($html);
     $this->afficheHtml($html);
   }
 
   public function construitListeItem($app,$token){
-    $vue = new ClientVue();
     $liste_id = $this->getListeId($token);
     $items = $this->getItems($liste_id);
-    $html = $vue->genereListeItem($app,$items);
+
+    $html = ClientVue::genereListeItem($app,$items);
+    $html = PrincipaleVue::genereHtml($html);
     $this->afficheHtml($html);
   }
 
