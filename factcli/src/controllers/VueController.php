@@ -29,6 +29,12 @@ class VueController{
   }
 
   public function construitFormulaire($app){
+    $html = UserVue::genereSignIn($app);
+    $html = PrincipaleVue::genereHtml($html);
+    $this->afficheHtml($html);
+  }
+
+  public function construitLogIn($app){
     $html = UserVue::genereLogin($app);
     $html = PrincipaleVue::genereHtml($html);
     $this->afficheHtml($html);

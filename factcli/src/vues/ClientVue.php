@@ -8,7 +8,7 @@ class ClientVue{
     $titre = array('nom','descr','img','tarif');
     $html = '
     <h2>Liste</h2>
-    <a href = "'.$app->urlFor('liste').'">Retour</a>
+    <a href = "'.$app->urlFor('liste_item').'">Retour</a>
     <table>
       <tr>';
 

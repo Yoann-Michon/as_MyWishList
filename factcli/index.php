@@ -11,26 +11,28 @@
  $app = new \Slim\Slim();
 
 //Création du lien vers les tableaux de facture des clients
- $app->get('/liste/(:token)', function($token = -1) use($app){
+ $app->get('/liste(/:token)', function($token = -1) use($app){
    //Sinon on récupère l'url avec l'id
    if($token != -1){
      $controller = new VueController();
      $controller->construitListeItem($app,$token);
    }
+   else{
+     $controller = new VueController();
+     $controller->construitListe($app);
+   }
  })->name('liste_item');
 
- //Création du lien vers la liste des clients
- $app->get('/liste', function() use($app){
-   $controller = new VueController();
-   $controller->construitListe($app);
- })->name('liste');
-
  //Création du lien vers le formulaire de login
- $app->get('/login', function() use($app){
+ $app->get('/signin', function() use($app){
    $controller = new VueController();
    $controller->construitFormulaire($app);
+ })->name('signIn');
+
+ $app->get('/login', function() use($app){
+   $controller = new VueController();
+   $controller->construitLogIn($app);
  })->name('login');
- 
  $app->run();
 
 ?>

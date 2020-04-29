@@ -4,7 +4,7 @@ require_once 'vendor/autoload.php';
 
 class UserVue{
 
-  public static function genereLogin($app){
+  public static function genereSignIn($app){
     $html ='<form action="" method="get">
               <label>Nom</label>
               <input type="text" placeholder="Ex: Toto" name="nom" required>
@@ -28,6 +28,20 @@ class UserVue{
             </form>';
     return $html;
   }
-  
+
+  public static function genereLogin($app){
+    $html ='<form action="" method="get">
+
+              <label>Username</label>
+              <input type="text" placeholder="Email ou pseudo" name="identifiant" required>
+
+              <label>Mot de passe</label>
+              <input type="password" placeholder="" name="pass" required>
+
+              <input type="submit" value="Valider">
+            </form>';
+    return $html;
+  }
+
 }
  ?>
