@@ -4,7 +4,6 @@ require_once 'vendor/autoload.php';
 
 use Illuminate\Database\Capsule\Manager as DB;
 use factcli\conf\ConnectionFactory as ConnectionFactory;
-
 use factcli\vues\ClientVue as ClientVue;
 use factcli\vues\PrincipaleVue as PrincipaleVue;
 use factcli\vues\UserVue as UserVue;
