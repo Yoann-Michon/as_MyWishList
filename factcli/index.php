@@ -13,12 +13,12 @@
 //Création du lien vers les tableaux de facture des clients
  $app->get('/liste(/:token)', function($token = -1) use($app){
    //Sinon on récupère l'url avec l'id
+   $controller = new VueController();
+
    if($token != -1){
-     $controller = new VueController();
      $controller->construitListeItem($app,$token);
    }
    else{
-     $controller = new VueController();
      $controller->construitListe($app);
    }
  })->name('liste_item');
