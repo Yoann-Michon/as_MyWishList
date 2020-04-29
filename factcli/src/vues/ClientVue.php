@@ -1,7 +1,7 @@
 <?php
 namespace factcli\vues;
 
-class ClientVue{
+class ClientVue extends PrincipaleVue{
 
   //Revois une chaine de caractère faite du code html du tableau de facture d'un client
   public static function genereListeItem($app,$items){
@@ -43,6 +43,10 @@ class ClientVue{
     }
     $html = $html.'</div>';
     return $html;
+  }
+
+  public static function afficheHtml($content){
+    parent::afficheHtml($content);
   }
 }
 ?>

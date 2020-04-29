@@ -2,7 +2,8 @@
 namespace factcli\vues;
 
 class PrincipaleVue{
-  public static function genereHtml($content){
+  // TODO: rajouter des parametres pour mettre differents css ou autre 
+  public static function afficheHtml($content){
     $html = "<!DOCTYPE html>
               <html lang=".'"fr"'.">
                 <head>
@@ -14,7 +15,7 @@ class PrincipaleVue{
                   $content
                 </body>
               </html>";
-    return $html;
+    echo $html;
   }
 }
  ?>

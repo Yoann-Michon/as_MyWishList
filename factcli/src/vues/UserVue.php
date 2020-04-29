@@ -2,7 +2,7 @@
 namespace factcli\vues;
 require_once 'vendor/autoload.php';
 
-class UserVue{
+class UserVue extends PrincipaleVue{
 
   public static function genereSignIn($app){
     $html ='<form action="" method="get">
@@ -43,5 +43,8 @@ class UserVue{
     return $html;
   }
 
+  public static function afficheHtml($content){
+    parent::afficheHtml($content);
+  }
 }
  ?>
