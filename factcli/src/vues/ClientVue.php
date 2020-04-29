@@ -1,14 +1,14 @@
 <?php
 namespace factcli\vues;
 
-class ClientVue{
+class ClientVue extends PrincipaleVue{
 
   //Revois une chaine de caractère faite du code html du tableau de facture d'un client
   public static function genereListeItem($app,$items){
     $titre = array('nom','descr','img','tarif');
     $html = '
     <h2>Liste</h2>
-    <a href = "'.$app->urlFor('liste').'">Retour</a>
+    <a href = "'.$app->urlFor('liste_item').'">Retour</a>
     <table>
       <tr>';
 
@@ -43,6 +43,10 @@ class ClientVue{
     }
     $html = $html.'</div>';
     return $html;
+  }
+
+  public static function afficheHtml($content){
+    parent::afficheHtml($content);
   }
 }
 ?>
