@@ -12,7 +12,7 @@ use factcli\models\Item as Item;
 class ItemVue {
   private $item;
 
-  public function construct($item){
+  public function __construct($item){
     parent:: construct();
     $this->item =$item;
   }

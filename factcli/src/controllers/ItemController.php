@@ -1,9 +1,7 @@
 <?php
 namespace factcli\controllers;
 
-require_once 'vendor/autoload.php';
-
-use \factcli\models\Item.php;
+use factcli\models\Item;
 
 class ItemController{
 
@@ -60,7 +58,7 @@ class ItemController{
   }
 
   /**
-  * Modifier l'item
+  * Modifier l'item et image
   */
 
   public function modifierItem($id,$token){
@@ -73,32 +71,56 @@ class ItemController{
     }
     if ($_POST["descr"] != ""){
       if ($_POST["descr"] ==  $_POST["descr"]){
-        $item->nom = $_POST["descr"];
+        $item->descr = $_POST["descr"];
         $item->save();
       }
     }
     if ($_POST["tarif"] != ""){
       if ($_POST["tarif"] ==  $_POST["tarif"]){
-        $item->nom = $_POST["tarif"];
-        $item->save();
-      }
-    }
-    if ($_POST["img"] != ""){
-      if ($_POST["img"] ==  $_POST["img"]){
-        $item->nom = $_POST["img"];
+        $item->tarif = $_POST["tarif"];
         $item->save();
       }
     }
     if ($_POST["url"] != ""){
       if ($_POST["url"] ==  $_POST["url"]){
-        $item->nom = $_POST["url"];
+        $item->url = $_POST["url"];
         $item->save();
       }
     }
+    $item-> img =$this->ajouterImage();
+    $item->save();
     $vue = new modifierItem($item);
     $vue-> render();
 
   }
 
-}
+  /**
+  * Ajouter l'image
+  */
+  function ajouterImage(){
+    $imgFile = $_FILES["image"];
+    $fileType = exif_imagetype( $_FILES["image"]);
+    $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
+    if (in_array($fileType, $allowTypes)){
+      if (move_uploaded_file($_FILES["image"])){
+        return $fileName;
+      } else {
+        $vue = new VueItem(null, Selection::FORM_IMAGE_UPLOAD_FAIL);
+        $vue->render();
+        return;
+      }
+    }
+  }
+
+  /**
+  * Supprimer l'image
+  */
+
+  function supprimerImage($item){
+    if ($item->img) unlink ($item->img);
+    $item->img == NULL;
+    $item->save();
+  }
+
+  }
 ?>
