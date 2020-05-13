@@ -31,7 +31,9 @@ class ClientVue extends PrincipaleVue{
 
   public static function genereClientFactureMosaique($app,$clients){
     $titre = array('titre','description');
-    $html = "<h2>Liste</h2>";
+    $html ='<a href = "'.$app->urlFor('login').'">S'."'".'identifier</a>';
+    $html =$html.'<a href = "'.$app->urlFor('signIn').'">S'."'".'enregistrer</a>';
+    $html = $html."<h2>Liste</h2>";
     $html = $html.'<div id="mosaique">';
     foreach ($clients as $client) {
       $html = $html.'<a href="'.$app->urlFor('liste_item',array('token' => $client[2])).'">

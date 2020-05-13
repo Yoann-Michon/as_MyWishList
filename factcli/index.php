@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * File:  index.php
  * Creation Date: 04/12/2017
