@@ -34,6 +34,12 @@ session_start();
    $controller = new AppController();
    $controller->construitLogIn($app);
  })->name('login');
- $app->run();
 
+ $app->post('/auth', function() use($app){
+   $controller = new AppController();
+   $controller->construitLogIn($app);
+   $app->response->redirect($app->urlFor('liste_item'));
+ })->name('auth');
+
+ $app->run();
 ?>

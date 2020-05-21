@@ -5,7 +5,7 @@ require_once 'vendor/autoload.php';
 class UserVue extends PrincipaleVue{
 
   public static function genereSignIn($app){
-    $html ='<form action="" method="get">
+    $html ='<form action="'.$app->urlFor('auth').'" method="post">
               <label>Nom</label>
               <input type="text" placeholder="Ex: Toto" name="nom" required>
 
@@ -30,7 +30,7 @@ class UserVue extends PrincipaleVue{
   }
 
   public static function genereLogin($app){
-    $html ='<form action="" method="get">
+    $html ='<form action="'.$app->urlFor('auth').'" method="post">
 
               <label>Username</label>
               <input type="text" placeholder="Email ou pseudo" name="identifiant" required>
