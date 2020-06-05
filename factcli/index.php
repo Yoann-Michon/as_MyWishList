@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * File:  index.php
  * Creation Date: 04/12/2017
@@ -33,6 +34,12 @@
    $controller = new AppController();
    $controller->construitLogIn($app);
  })->name('login');
- $app->run();
 
+ $app->post('/auth', function() use($app){
+   $controller = new AppController();
+   $controller->construitLogIn($app);
+   $app->response->redirect($app->urlFor('liste_item'));
+ })->name('auth');
+
+ $app->run();
 ?>
